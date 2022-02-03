@@ -29,3 +29,8 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+// flutter secure store 라이브러리를 통한 KeyStore사용을 위한 
+defaultConfig{ 
+    minSdkVersion 18
+}

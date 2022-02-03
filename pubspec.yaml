@@ -27,7 +27,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  provider: ^6.0.2
+  provider: ^6.0.2 #전체 state 관리를 위한 package
+  http: ^0.13.4 # http method를 이용한 통신을 위한 package
+  flutter_secure_storage: ^5.0.2 # 각 플랫폼의 내부 저장소를 사용할수 있게 해주는 라이브러리
   flutter:
     sdk: flutter
 

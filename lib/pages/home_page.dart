@@ -14,7 +14,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(Provider.of<myLogin>(context).loginState);
     return Scaffold(
       appBar: AppBar(),
       body: Container(),
