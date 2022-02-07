@@ -23,16 +23,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) {
-            return myLogin(); //probider_model.dart
-          },
-        ),
+        ChangeNotifierProvider(create: (context) => myLogin()),
       ],
       child: MaterialApp(
         initialRoute: "/",
         routes: {
-          '/': (context) => const MyHomePage(),
+          '/': (context) => MyHomePage(),
           '/route1': (context) => RoutePage1(),
           '/route2': (context) => RoutePage2(),
           '/loginpage': (context) => LoginPage(),

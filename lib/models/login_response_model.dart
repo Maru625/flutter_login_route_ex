@@ -4,12 +4,11 @@ import 'dart:convert'; // json.decode 함수를 사용하기 위함
 // API 서버와의 통신을 통해 받아오는 token을 class형으로 바꾸기 위한 선언
 
 class LoginResponse {
-  final String id;
-  final String pw;
-  LoginResponse({required this.id, required this.pw});
+  final String token;
+  LoginResponse({required this.token});
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
-    return LoginResponse(id: json['id'], pw: json['id']);
+    return LoginResponse(token: json['token']);
   }
 }
 
@@ -25,8 +24,8 @@ Future<LoginResponse> postRequest(String id, String pw) async {
       'pw': pw,
     }),
   );
-  print(response.body);
   if (response.statusCode == 200) {
+    print(response.body);
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return LoginResponse.fromJson(jsonDecode(response.body));
