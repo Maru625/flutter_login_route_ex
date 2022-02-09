@@ -12,9 +12,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  static const secureStorage = FlutterSecureStorage();
+  static final secureStorage = new FlutterSecureStorage();
   Future<LoginResponse>? loginResponse;
-  var localLoginState = false;
 
   // login stage
   Column buildColumn() {
@@ -44,8 +43,8 @@ class LoginPageState extends State<LoginPage> {
         ElevatedButton(
           onPressed: () {
             setState(() {
-              loginResponse = postRequest(idController.text, pwController.text);
-              debugPrint("${loginResponse}");
+              loginResponse = postRequest(
+                  idController.text, pwController.text, secureStorage);
             });
           },
           child: const Text("LOGIN"),
@@ -60,14 +59,21 @@ class LoginPageState extends State<LoginPage> {
       future: loginResponse,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          setState(() async {
-            // // secure storage에 값 저장
-            // await secureStorage.write(
-            //     key: 'access token', value: snapshot.data!.id);
-          });
-          return Text(snapshot.data!.token);
+          return Column(
+            children: <Widget>[
+              Text("Succes Login!"),
+              ElevatedButton(
+                onPressed: (() {
+                  Provider.of<myLogin>(context, listen: false)
+                      .changeLogin(); //login provider state controll
+                  Navigator.pushNamed(context, '/home');
+                }),
+                child: Text("return to HOME..."),
+              )
+            ],
+          );
         } else if (snapshot.hasError) {
-          context.read<myLogin>().changeLogin();
+          context.read<myLogin>().changeLogout();
           debugPrint(
               "login page provider : ${context.watch<myLogin>().loginState}");
           return Text('${snapshot.error}');
@@ -82,10 +88,10 @@ class LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Login page"),
-        leading: IconButton(
-          icon: Icon(Icons.home),
-          onPressed: () => Navigator.pushNamed(context, '/'),
-        ),
+        // leading: IconButton(
+        //   icon: Icon(Icons.home),
+        //   onPressed: () => Navigator.pushNamed(context, '/'),
+        // ),
       ),
       body: Center(
         child: SizedBox(

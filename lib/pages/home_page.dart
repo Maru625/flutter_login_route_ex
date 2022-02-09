@@ -15,7 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     // ignore: non_constant_identifier_names
-    var DarwerState = context.watch<myLogin>().loginState;
+    var DarwerState = Provider.of<myLogin>(context, listen: true).loginState;
     debugPrint("current state : ${context.watch<myLogin>().loginState}");
     return Scaffold(
       appBar: AppBar(),
@@ -24,9 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            Consumer<myLogin>(
-                builder: (context, value, child) =>
-                    userDrawerHeader(value.loginState)),
+            userDrawerHeader(DarwerState),
             ListTile(
               title: Text('Route 1'),
               onTap: () {
@@ -87,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
             IconButton(
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.pushReplacementNamed(context, '/loginpage');
+                Navigator.pushNamed(context, '/loginpage');
               },
               icon: Icon(Icons.login),
             )

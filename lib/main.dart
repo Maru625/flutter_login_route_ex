@@ -26,9 +26,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (context) => myLogin()),
       ],
       child: MaterialApp(
-        initialRoute: "/",
+        initialRoute: "/home",
         routes: {
-          '/': (context) => MyHomePage(),
+          '/home': (context) => MyHomePage(),
           '/route1': (context) => RoutePage1(),
           '/route2': (context) => RoutePage2(),
           '/loginpage': (context) => LoginPage(),
