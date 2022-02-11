@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:login_route/models/probider_model.dart';
+import 'package:login_route/widgets/home_login_widget.dart';
 import 'package:provider/provider.dart';
+
+import '../widgets/home_logout_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -19,7 +22,11 @@ class _MyHomePageState extends State<MyHomePage> {
     debugPrint("current state : ${context.watch<myLogin>().loginState}");
     return Scaffold(
       appBar: AppBar(),
-      body: Container(),
+      body: Container(
+        child: (Provider.of<myLogin>(context).loginState
+            ? HomeLoginBody()
+            : HomeLogoutBody()),
+      ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -61,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  // build Drawer widget
   Widget userDrawerHeader(DarwerState) {
     if (DarwerState) {
       return UserAccountsDrawerHeader(
@@ -69,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
         accountName: Text('Dev'),
         onDetailsPressed: () {
           debugPrint('press details');
+          Navigator.pushNamed(context, '/userManagement');
         },
         decoration: BoxDecoration(
             color: Colors.blue[300],

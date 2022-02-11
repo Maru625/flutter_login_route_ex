@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_route/pages/user_management.dart';
 import 'package:provider/provider.dart';
 
 import 'package:login_route/models/probider_model.dart';
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
           '/route1': (context) => RoutePage1(),
           '/route2': (context) => RoutePage2(),
           '/loginpage': (context) => LoginPage(),
+          '/userManagement': (context) => UserManagementPage(),
         },
         //child 하위의 모든것들은 myLogin에 접근 가능
         title: 'Flutter Demo',
